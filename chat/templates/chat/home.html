@@ -12,14 +12,14 @@
     }
 
     .bgDark:hover {
-        background-color: rgb(28, 79, 189);
+        background-color: rgb(28, 178, 189);
         color: white;
         text-decoration: none;
         font-weight: 500;
     }
 
     .bg-primary {
-        background-color: rgb(28, 79, 189) !important;
+        background-color: rgb(28, 178, 189)!important;
         color: black;
         font-weight: 500;
     }
@@ -43,40 +43,62 @@
     .container {
         display: flex;
         height: 90vh;
-        width: 120%;
+        width: 100%;
         text-decoration: none;
+
     }
 
-    .user-list-column {
+/*     .user-list-column {
         flex: 0 0 25%;
         border-right: 1px solid #ccc;
         overflow-y: auto;
         background-color: rgb(66, 63, 63);
-        position: relative;
-        right: 23.2%;
-        text-decoration: none;
-
 
     }
+ */
 
+ .user-list-column {
+        flex: 0 0 25%;
+        border-right: 1px solid #ccc;
+        overflow-y: auto;
+        background-color: rgb(66, 63, 63);
+        text-decoration: none;
+        position: absolute; 
+        left: 0.5%; 
+        height: 100%;    
+    } 
 
-    .chat-box-column {
+/*     .chat-box-column {
         flex: 2;
         overflow-y: auto;
         background-color: white;
         width: 100%;
-        max-width: 100%;
+        max-width: 10%;
         min-width: 100%;
+    
+    }
+ */
 
+ .chat-box-column {
+        flex: 2;
+        overflow-y: auto;
+        background-color: white;
+        max-width: 115%;
+        min-width: 115%;
+        position: relative; 
+        left: 5%; 
     }
 
+ /*    .chat-box {
+        overflow-y: auto;
+        height: 80%; 
+        width: 100%;
+    } */
 
     .chat-box {
         height: 80%;
         overflow-y: auto;
-
     }
-
 
     .chat {
         background-color: rgb(132, 136, 139);
@@ -85,7 +107,6 @@
     #search-box {
         margin-top: 8px;
         margin-right: 10px;
-
     }
 
     #search-input {
@@ -94,25 +115,23 @@
 
     #search-icon {
         color: black;
-
     }
 
     .form-control {
         background-color: white;
-
     }
 
-
-    body {
+/*     body {
         background: url('https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg?cs=srgb&dl=pexels-pixabay-33545.jpg&fm=jpg') no-repeat center center fixed;
         background-size: cover;
     
-    }
+    } */
 
     body {
         margin: 0;
         overflow: hidden;
     }
+
 </style>
 
 {% endblock %}
@@ -124,7 +143,6 @@
 </video> -->
 
 <div class="container">
-    <!-- User List Column -->
     <div class="user-list-column">
         <div class="list-group" id='user-list-wrapper'>
             <form class="form-inline mb-3" id="search-box">
@@ -159,9 +177,12 @@
         </div>
         {% else %}
         
-        <div id="chat-box-field" class="h-100" style="  background: url('https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg?cs=srgb&dl=pexels-pixabay-33545.jpg&fm=jpg') no-repeat center center fixed;
-        background-size: cover;">
-            <div class="chat-box" style="height: 80%;">
+        <div id="chat-box-field" class="h-100">
+ 
+       <!--   style="background: url('https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg?cs=srgb&dl=pexels-pixabay-33545.jpg&fm=jpg') no-repeat center center fixed;
+        background-size: cover;" -->
+
+            <div class="chat-box">
                 {% for chat in chats %}
                 {% if chat.user_from == user %}
                 <div class="p-2 w-100 d-flex justify-content-end">
@@ -189,16 +210,17 @@
                 {% endfor %}
 
             </div>
-            <div class="chat-box-form border-top p-2" style="height: 20%;">
+            <div class="chat-box-form border-top p-2" >
                 <form action="" id="chat-submit" class="h-100 d-flex ">
                     <input type="hidden" name="user_from" value="{{ user.id }}">
                     <input type="hidden" name="user_to" value="{{ chat_id }}">
-                    <div class="col-md-10 h-200">
+
+                  <div class="col-md-10 h-200">
                         <textarea name="message" id="" class="h-100 w-100 form-control"
                             placeholder="Write your message here"></textarea>
-                    </div>
-                    <button
-                        class="button btn btn-primary h-100 w-100 justify-content-center align-items-center d-flex">SEND</button>
+                    </div> 
+
+                    <button class="button btn btn-primary h-100 w-100 justify-content-center align-items-center d-flex">SEND</button>
                 </form>
             </div>
         </div>
@@ -292,8 +314,6 @@
             }
         });
     });
-
-    
 
     function chats_renew() {
         var last_id = 0;
